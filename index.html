@@ -13,7 +13,7 @@
 <script type="text/javascript" src="js/jquery/jquery.validate-1.5.1.js"></script>
 <script type="text/javascript" src="js/app.js"></script>
 
-<form action="" method="post" name="creditForm" id="creditForm">
+<form action="" method="post" name="creditForm" id="creditForm" onsubmit="calcCredit()">
     <label for="name">Имя: <span></span></label><br>
     <input name="name" id="name" type="text" size="30" value=''><br>
 
@@ -77,6 +77,24 @@
      period = document.getElementById("period");
      period.value = valueSlider;
    }
+
+    function calcCredit() {
+        var creditForm =  document.getElementById("creditForm");
+        var priceAuto = document.getElementById("priceAuto").value;
+        var deposite = document.getElementById("deposite").value;
+        var period = document.getElementById("period").value;
+
+        var payment = Math.round((priceAuto - deposite)/(1 - 1/Math.pow((10000 + 1183)/10000, period) )/10);
+
+        var div = document.createElement('div');
+        div.innerHTML = 
+        "<form action='' method='post' name='confirmForm' id='confirmForm'>Ежемесячный платеж составит " +
+                                                                           payment + " рублей. Оформить кредит?" +
+        "<p><input type='submit' name='submit' value='Согласен''></p>" +
+        "</form>";
+
+        document.body.appendChild(div);
+    }
 
 
 </script>
