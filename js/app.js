@@ -1,8 +1,12 @@
 
 $(document).ready(function(){
+  
+  var priceAuto = document.getElementById("priceAuto");
+  var okButton = document.getElementsByClassName("ok")[0];
+
   $.validator.addMethod('validName', function (value) {
      var result = true;
-     var iChars = "`~!@#$%^&*()+=-[]\\\';,./{}|\":<>?"+"0123456789"+" ";
+     var iChars = "`~!@#$%^&*()+=-[]\\\';,./{}|\":<>?"+"0123456789";
       for (var i = 0; i < value.length; i++) {
           if (iChars.indexOf(value.charAt(i)) != -1) {
               return false;
@@ -23,7 +27,15 @@ $(document).ready(function(){
       return result;
   }, '');
 
+  $.validator.addMethod('validDeposite', function (value) {
+    return value < priceAuto.value;
+  }, '');
+
   $("#creditForm").validate({
+    submitHandler: function(form) {
+        calcCredit();
+        okButton.className = 'ok_showen';
+    },
     focusInvalid: false,
     focusCleanup: true,
     rules: {
@@ -31,11 +43,7 @@ $(document).ready(function(){
            required: true,
            validName: true,
            minlength: 2,
-           maxlength: 30,
-           remote: {
-              url: "check_name.php",
-              type: "post"
-           }
+           maxlength: 30
       },
 
       email: {
@@ -59,7 +67,8 @@ $(document).ready(function(){
       deposite: {
            required: true,
            validNum: true,           
-           range: [10000,1000000]
+           range: [10000,1000000],
+           validDeposite: true
       },
 
       period: {
@@ -68,7 +77,9 @@ $(document).ready(function(){
            range: [3,120]
       },
     },
-
+    invalidHandler: function() {
+        okButton.className = 'ok';
+    },
     messages: {
       name: {
         required: "Введите имя пользователя",
@@ -99,7 +110,8 @@ $(document).ready(function(){
       deposite: {
         required: "Укажите стоимость автомобиля",
         validNum: "Введите корректную сумму ",
-        range: "Укажите сумму от 10000 до 1000000 "
+        range: "Укажите сумму от 10000 до 1000000 ",
+        validDeposite: 'Взнос не может превышать сумму автомобиля, ты что, идиот?'
       },
 
       period: {

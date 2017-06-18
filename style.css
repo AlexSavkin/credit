@@ -1,4 +1,12 @@
-  label span {
-      color: red;
-  }
+label span {
+  color: red;
+}
+
+.ok {
+	display: none;
+}
+
+.ok_showen {
+	display: block;
+}
 

@@ -13,7 +13,7 @@
     <script type="text/javascript" src="js/jquery/jquery.validate-1.5.1.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
 
-    <form action="" method="post" name="creditForm" id="creditForm" onsubmit="calcCredit()">
+    <form action="" method="post" name="creditForm" id="creditForm">
         <label for="name">Имя: <span></span></label><br>
         <input name="name" id="name" type="text" size="30" value=''><br>
 
@@ -39,10 +39,15 @@
                oninput="valuePeriod()"><br>     
 
         <p><input type="submit" name="submit" value="Рассчитать"></p>
+        <div>
+            Ежемесячный платеж: 
+            <span id="summary"><span>
+        </div>
     </form>
+    <button class="ok" onclick="onOkbuttonClick()">Согласен</button>
+    <div id="success"></div>
 
     <script>
-        var complied = false;
         var priceAuto = document.getElementById("priceAuto");
         var deposite = document.getElementById("deposite");
         var period = document.getElementById("period");
@@ -50,6 +55,9 @@
         var name = document.getElementById("name");
         var email = document.getElementById("email");
         var phone = document.getElementById("phone");
+        var summary = document.getElementById("summary");
+        var okButton = document.getElementsByClassName("ok")[0];
+        var success = document.getElementById("success");
 
         function positionSliderPriceAuto() {
             var sliderPriceAuto = document.getElementById("sliderPriceAuto");
@@ -68,7 +76,7 @@
 
         function valueDeposite() {
             valueSlider = document.getElementById("sliderDeposite").value;
-         deposite.value = valueSlider;
+            deposite.value = valueSlider;
         }
 
         function positionSliderPeriod() {
@@ -82,21 +90,22 @@
         }
 
         function calcCredit() {
-            var payment = Math.round((priceAuto.value - deposite.value)/(1 - 1/Math.pow((10000 + 1183)/10000, period.value) )/10);
+            var payment =
+                Math.round((priceAuto.value - deposite.value)/(1 - 1/Math.pow((10000 + 1183)/10000, period.value) )/10);
 
-            var div = document.createElement('div');
-            div.innerHTML = 
-                "<form action='mailto:" + email + "' type='post' enctype='text/plain'>" +
-                "<label for='subj'>Тема:</label><br />" +
-                "<input type='text' id='subj' name='Subject' /><br /><br />" +
-                "<label for='body'>Текст:</label><br />" +
-                "<input id='body' name='Body' size='30' value='sssssssss'   ></textarea><br /><br />" +
-                "<input type='submit' value='Отправить письмо' />" +
-                "</form>";
+            summary.innerHTML = payment;
+        }
 
-            document.body.appendChild(div);
-            alert(payment);
-    }
+        function onOkbuttonClick() {
+            okButton.className = 'ok';
+            console.log('собрать данные с формы');
+            console.log('А тут нужно что-то сделать чтобы отпрваить емайл');
+            success.innerHTML = 'Письмо отправлено';
+
+            setTimeout(function() {
+                success.innerHTML = '';                
+            }, 3000)
+        }
 
     </script>
 
