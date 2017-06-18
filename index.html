@@ -42,6 +42,7 @@
 </form>
 
 <script>
+
    function positionSliderPriceAuto() {
     priceAuto = document.getElementById("priceAuto").value;
     sliderPriceAuto = document.getElementById("sliderPriceAuto");
@@ -80,6 +81,9 @@
 
     function calcCredit() {
         var creditForm =  document.getElementById("creditForm");
+        var name = document.getElementById("name");
+        var email = document.getElementById("email");
+        var phone = document.getElementById("phone");
         var priceAuto = document.getElementById("priceAuto").value;
         var deposite = document.getElementById("deposite").value;
         var period = document.getElementById("period").value;
@@ -88,9 +92,12 @@
 
         var div = document.createElement('div');
         div.innerHTML = 
-        "<form action='' method='post' name='confirmForm' id='confirmForm'>Ежемесячный платеж составит " +
-                                                                           payment + " рублей. Оформить кредит?" +
-        "<p><input type='submit' name='submit' value='Согласен''></p>" +
+        "<form action='mailto:" + email + "' type='post' enctype='text/plain'>" +
+        "<label for='subj'>Тема:</label><br />" +
+        "<input type='text' id='subj' name='Subject' /><br /><br />" +
+        "<label for='body'>Текст:</label><br />" +
+        "<input id='body' name='Body' size='30' value='sssssssss'   ></textarea><br /><br />" +
+        "<input type='submit' value='Отправить письмо' />" +
         "</form>";
 
         document.body.appendChild(div);
