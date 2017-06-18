@@ -24,27 +24,62 @@
     <input name="phone" id="phone" type="text" size="30"><br>
 
     <label for="priceAuto">Стоимость: <span></span></label><br>
-    <input name="priceAuto" id="priceAuto" type="text" size="30"><br>
-    <div id="slider" class="slider">
-      <div class="thumb"></div>
-    </div>
+    <input name="priceAuto" id="priceAuto" type="text" size="30" oninput="positionSliderPriceAuto()"><br>
+    <input name="sliderPriceAuto" id="sliderPriceAuto" type="range" min="10000" max="1000000" step="1000" value="10000" 
+           oninput="valuePriceAuto()"><br> 
 
     <label for="deposite">Взнос: <span></span></label><br>
-    <input name="deposite" id="deposite" type="text" size="30"><br>
-    <div id="slider" class="slider">
-      <div class="thumb"></div>
-    </div>
+    <input name="deposite" id="deposite" type="text" size="30" oninput="positionSliderDeposite()"><br>
+    <input name="sliderDeposite" id="sliderDeposite" type="range" min="10000" max="1000000" step="1000" value="10000" 
+           oninput="valueDeposite()"><br> 
 
     <label for="period">Срок: <span></span></label><br>
-    <input name="period" id="period" type="text" size="30"><br>
-    <div id="slider" class="slider">
-      <div class="thumb"></div>
-    </div>
+    <input name="period" id="period" type="text" size="30" oninput="positionSliderPeriod()"><br>
+    <input name="sliderPeriod" id="sliderPeriod" type="range" min="3" max="120" step="1" value="3" 
+           oninput="valuePeriod()"><br>     
 
     <p><input type="submit" name="submit" value="Рассчитать"></p>
 </form>
 
-<script type="text/javascript" src="js/slider.js"></script>
+<script>
+   function positionSliderPriceAuto() {
+    priceAuto = document.getElementById("priceAuto").value;
+    sliderPriceAuto = document.getElementById("sliderPriceAuto");
+    sliderPriceAuto.value = priceAuto;
+   }
+
+   function valuePriceAuto() {
+     valueSlider = document.getElementById("sliderPriceAuto").value;
+     priceAuto = document.getElementById("priceAuto");
+     priceAuto.value = valueSlider;
+   }
+
+   function positionSliderDeposite() {
+    deposite = document.getElementById("deposite").value;
+    sliderDeposite = document.getElementById("sliderDeposite");
+    sliderDeposite.value = deposite;
+   }
+
+   function valueDeposite() {
+     valueSlider = document.getElementById("sliderDeposite").value;
+     deposite = document.getElementById("deposite");
+     deposite.value = valueSlider;
+   }
+
+   function positionSliderPeriod() {
+    period = document.getElementById("period").value;
+    sliderPeriod = document.getElementById("sliderPeriod");
+    sliderPeriod.value = period;
+   }
+
+   function valuePeriod() {
+     valueSlider = document.getElementById("sliderPeriod").value;
+     period = document.getElementById("period");
+     period.value = valueSlider;
+   }
+
+
+</script>
 
 </body>
 </html>

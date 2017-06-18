@@ -53,19 +53,19 @@ $(document).ready(function(){
       priceAuto: {
            required: true,
            validNum: true,           
-           range: [10000,99000000]
+           range: [10000,1000000]
       }, 
 
       deposite: {
            required: true,
            validNum: true,           
-           range: [10000,99000000]
+           range: [10000,1000000]
       },
 
       period: {
            required: true,
            validNum: true,           
-           range: [3,240]
+           range: [3,120]
       },
     },
 
@@ -93,19 +93,19 @@ $(document).ready(function(){
       priceAuto: {
         required: "Укажите стоимость автомобиля",
         validNum: "Введите корректную сумму ",
-        range: "Укажите сумму от 10000 до 99000000 "
+        range: "Укажите сумму от 10000 до 1000000 "
       },
 
       deposite: {
         required: "Укажите стоимость автомобиля",
         validNum: "Введите корректную сумму ",
-        range: "Укажите сумму от 10000 до 99000000 "
+        range: "Укажите сумму от 10000 до 1000000 "
       },
 
       period: {
         required: "Укажите срок кредитования",
         validNum: "Введите корректный период ",
-        range: "Укажите срок от 3 до 240 месяцев "
+        range: "Укажите срок от 3 до 120 месяцев "
       },
     },
     errorPlacement: function(error, element) {
