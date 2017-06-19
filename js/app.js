@@ -1,6 +1,5 @@
 
-$(document).ready(function(){
-  
+$(document).ready(function(){  
     var priceAuto = document.getElementById("priceAuto");
     var okButton = document.getElementsByClassName("ok")[0];
 
@@ -28,7 +27,7 @@ $(document).ready(function(){
     }, '');
 
     $.validator.addMethod('validDeposite', function (value) {
-        return value < priceAuto.value;
+        return +value < +priceAuto.value;
     }, '');
 
     $("#creditForm").validate({
@@ -114,7 +113,7 @@ $(document).ready(function(){
                 required: "Укажите стоимость автомобиля",
                 validNum: "Введите корректную сумму ",
                 range: "Укажите сумму от 10000 до 1000000 ",
-                validDeposite: 'Взнос не может превышать сумму автомобиля!'
+                validDeposite: "Взнос не может превышать сумму автомобиля! "
             },
 
             period: {
