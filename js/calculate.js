@@ -55,8 +55,17 @@ function onOkbuttonClick() {
                  " рублей с первоначальным взносом в " + deposite.value + " рублей на срок " + period.value + 
                  " месяцев. Ежемесячный платеж составит: " + payment + " рублей."; 
 
-    console.log(letter);                
-    console.log('Отправить на почту');
+    var obj = {
+        letter: letter,
+        email: email.value
+    };
+
+    $.ajax({
+        url: 'ajax.php',
+        data: JSON.stringify(obj),
+        type: 'POST',
+        contentType: 'application/json'
+    });
 
     success.innerHTML = 'Письмо отправлено';
 
