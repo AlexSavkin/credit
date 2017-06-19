@@ -42,7 +42,6 @@ function valuePeriod() {
 function calcCredit() {
     var payment =
         Math.round((priceAuto.value - deposite.value)/(1 - 1/Math.pow((10000 + 1183)/10000, period.value) )/10);
-
     summary.innerHTML = payment;
     return payment;
 }
@@ -51,18 +50,27 @@ function onOkbuttonClick() {
     okButton.className = 'ok';
 
     var payment = calcCredit();
-    var letter = clientName.value + ", вы указали номер " + phone.value + " для взятия кредита в " + priceAuto.value + 
-                 " рублей с первоначальным взносом в " + deposite.value + " рублей на срок " + period.value + 
-                 " месяцев. Ежемесячный платеж составит: " + payment + " рублей."; 
+    var letter = clientName.value + ", вы указали номер " + phone.value +
+        " для взятия кредита в " + priceAuto.value + 
+        " рублей с первоначальным взносом в " + deposite.value +
+        " рублей на срок " + period.value + 
+        " месяцев. Ежемесячный платеж составит: "
+        + payment + " рублей."; 
 
-    var obj = {
-        letter: letter,
-        email: email.value
-    };
+    var url = '';
+
+    /* url какого-то сервиса для для рассылки писем, например mandrillapp.com,
+        в случае если рассылка идет через сторонний сервис;
+        либо url своего сервера, который будет отправлять эти письма сам,
+        либо email-sandler.php 
+    */
 
     $.ajax({
-        url: 'ajax.php',
-        data: JSON.stringify(obj),
+        url: url,
+        data: JSON.stringify({
+            email: email.value,
+            letter: letter
+        }),
         type: 'POST',
         contentType: 'application/json'
     });
